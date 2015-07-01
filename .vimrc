@@ -9,46 +9,84 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
+
 " Plugin 'Valloric/YouCompleteMe'
+"
+"
 Plugin 'bling/vim-airline'
+" populate g:airline_symbols dictionary with the powerline symbols
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#syntastic#enabled = 1
+
 Plugin 'mhinz/vim-startify'
+
 Plugin 'altercation/vim-colors-solarized'
+
 Plugin 'embear/vim-localvimrc'
+let g:localvimrc_persistent = 2
+
+" This doesn't work for me
+" Plugin 'myusuf3/numbers.vim'
+
 Plugin 'tomtom/tcomment_vim'
-Plugin 'hynek/vim-python-pep8-indent'
+
+Plugin 'ervandew/supertab'
 
 " Syntastic
-"Plugin 'scrooloose/syntastic'
+" Plugin 'scrooloose/syntastic'
+" let g:syntastic_always_populate_loc_list=1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 1
+" let g:syntastic_mode_map = {'mode': 'active',
+"                            \'passive_filetypes': ['python']}
+" let g:syntastic_python_python_exec='/usr/bin/python3'
 
-" Python Plugins
+
+
+"""" Python Plugins
+
 Plugin 'hdima/python-syntax'
-" Plugin 'klen/python-mode'
-Plugin 'davidhalter/jedi-vim'
-Plugin 'nvie/vim-flake8'
 
-" Git Plugins
+Plugin 'hynek/vim-python-pep8-indent'
+
+Plugin 'davidhalter/jedi-vim'
+autocmd FileType python setlocal completeopt-=preview
+
+Plugin 'nvie/vim-flake8'
+autocmd BufWritePost *.py call Flake8()
+" let g:flake8_show_in_file = 1
+
+" Plugin 'klen/python-mode'
+" Don't ignore any linting errors or warnings with pymode
+" let g:pymode_lint_ignore = ''
+" let g:pymode_rope_completion = 0
+" let g:pymode_trim_whitespaces = 1
+" let g:pymode_folding = 0
+" let g:pymode_python = 'python3'
+
+
+
+"""" Git Plugins
+
 Plugin 'tpope/vim-fugitive'
 
-" Javascript Plugins
+
+
+"""" Javascript Plugins
+
 Plugin 'pangloss/vim-javascript'
+
 Plugin 'othree/javascript-libraries-syntax.vim'
+
 Plugin 'burnettk/vim-angular'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
-set incsearch
+
+""" vim options """
+
 " set t_Co=256
 set t_Co=16
 set background=dark
@@ -60,56 +98,60 @@ set expandtab
 set softtabstop=4
 set shiftwidth=4
 set backspace=2
+set smarttab
 
+" Enable syntax highlighting
 syntax on
-" let python_highlight_all = 1
+" Highlight searches
 set hlsearch
+" Highlight dynamically as pattern is typed
+set incsearch
+" Ignore case of searches
+set ignorecase
+" Don't reset cursor to start of line when moving around
+set nostartofline
+" Show the filename in the window titlebar
+set title
+" Show the (partial) command as it's being typed
+set showcmd
+" Show the status line always
+set laststatus=2
+" Start scrolling three lines before the horizondal window border
+set scrolloff=3
+" Start scrolling three chars before the vertical window border
+set sidescrolloff=3
+" Use relative linenumbers
+set relativenumber
+" Use advance command line completion
+set wildmenu
+" Delete comment character when joining commented lines
+set formatoptions+=j
+" Timeout key combinations after .1 seconds
+set ttimeout
+set ttimeoutlen=100
 
+
+""" Filetype-specific settings """
+
+" Shorten the tabstop for html files
 autocmd FileType html setlocal shiftwidth=2 tabstop=2
+" Treat .json files as .js
+autocmd BufNewFile,BufRead *.json setfiletype json syntax=javascript
+" Treat .md files as Markdown
+autocmd BufNewFile,BufRead *.md setlocal filetype=markdown
 
-" vim-localvimrc options
-let g:localvimrc_persistent = 2
+""" Functions """
 
-" vim-flake8 options
-autocmd BufWritePost *.py call Flake8()
-" let g:flake8_show_in_file = 1
-
-" automatically close the quickfix window if it's the only window present
+" Automatically close the quickfix window if it's the only window present
 aug QFClose
     au!
     au WinEnter * if winnr('$') == 1 && getbufvar(winbufnr(winnr()), "&buftype") == "quickfix"|q|endif
 aug END
 
-" Don't ignore any linting errors or warnings with pymode
-" let g:pymode_lint_ignore = ''
-" let g:pymode_rope_completion = 0
-" let g:pymode_trim_whitespaces = 1
-" let g:pymode_folding = 0
-" let g:pymode_python = 'python3'
-
-" syntastic options
-" let g:syntastic_always_populate_loc_list=1
-" let g:syntastic_auto_loc_list = 1
-" let g:syntastic_check_on_open = 1
-" let g:syntastic_check_on_wq = 1
-" let g:syntastic_mode_map = {'mode': 'active',
-"                            \'passive_filetypes': ['python']}
-
-" let g:syntastic_python_python_exec='/usr/bin/python3'
-
-set relativenumber
-
-" Show the status line always
-set laststatus=2
-
-" populate g:airline_symbols dictionary with the powerline symbols
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#syntastic#enabled = 1
-
 " hilight the cursor line in insert mode
 autocmd InsertEnter,InsertLeave * set cul!
 
-" remove trailing whitespaces
+" remove trailing whitespaces on every save
 func! DeleteTrailingWS()
   exe "normal mz"
   %s/\s\+$//ge
@@ -117,7 +159,7 @@ func! DeleteTrailingWS()
 endfunc
 autocmd BufWrite *.py :call DeleteTrailingWS()
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " set pep8 text widths for python comments and docstrings
 function! GetPythonTextWidth()
     if !exists('g:python_normal_text_width')
@@ -154,4 +196,4 @@ augroup pep8
     au!
     autocmd CursorMoved,CursorMovedI * :if &ft == 'python' | :exe 'setlocal textwidth='.GetPythonTextWidth() | :endif
 augroup END
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
