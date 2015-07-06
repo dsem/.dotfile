@@ -51,11 +51,12 @@ Plugin 'hdima/python-syntax'
 Plugin 'hynek/vim-python-pep8-indent'
 
 Plugin 'davidhalter/jedi-vim'
-autocmd FileType python setlocal completeopt-=preview
 
 Plugin 'nvie/vim-flake8'
 autocmd BufWritePost *.py call Flake8()
 " let g:flake8_show_in_file = 1
+
+Plugin 'python-rope/ropevim'
 
 " Plugin 'klen/python-mode'
 " Don't ignore any linting errors or warnings with pymode
@@ -86,6 +87,8 @@ call vundle#end()            " required
 filetype plugin indent on    " required
 
 """ vim options """
+
+let mapleader=' '
 
 " set t_Co=256
 set t_Co=16
@@ -139,6 +142,8 @@ autocmd FileType html setlocal shiftwidth=2 tabstop=2
 autocmd BufNewFile,BufRead *.json setfiletype json syntax=javascript
 " Treat .md files as Markdown
 autocmd BufNewFile,BufRead *.md setlocal filetype=markdown
+" Highlight the 80 character column in python
+autocmd FileType python setlocal colorcolumn=80
 
 """ Functions """
 
@@ -161,39 +166,39 @@ autocmd BufWrite *.py :call DeleteTrailingWS()
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " set pep8 text widths for python comments and docstrings
-function! GetPythonTextWidth()
-    if !exists('g:python_normal_text_width')
-        let normal_text_width = 79
-    else
-        let normal_text_width = g:python_normal_text_width
-    endif
-
-    if !exists('g:python_comment_text_width')
-        let comment_text_width = 72
-    else
-        let comment_text_width = g:python_comment_text_width
-    endif
-
-    let cur_syntax = synIDattr(synIDtrans(synID(line("."), col("."), 0)), "name")
-    if cur_syntax == "Comment"
-        return comment_text_width
-    elseif cur_syntax == "String"
-        " Check to see if we're in a docstring
-        let lnum = line(".")
-        while lnum >= 1 && (synIDattr(synIDtrans(synID(lnum, col([lnum, "$"]) - 1, 0)), "name") == "String" || match(getline(lnum), '\v^\s*$') > -1)
-            if match(getline(lnum), "\\('''\\|\"\"\"\\)") > -1
-                " Assume that any longstring is a docstring
-                return comment_text_width
-            endif
-            let lnum -= 1
-        endwhile
-    endif
-
-    return normal_text_width
-endfunction
-
-augroup pep8
-    au!
-    autocmd CursorMoved,CursorMovedI * :if &ft == 'python' | :exe 'setlocal textwidth='.GetPythonTextWidth() | :endif
-augroup END
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" function! GetPythonTextWidth()
+"     if !exists('g:python_normal_text_width')
+"         let normal_text_width = 79
+"     else
+"         let normal_text_width = g:python_normal_text_width
+"     endif
+"
+"     if !exists('g:python_comment_text_width')
+"         let comment_text_width = 72
+"     else
+"         let comment_text_width = g:python_comment_text_width
+"     endif
+"
+"     let cur_syntax = synIDattr(synIDtrans(synID(line("."), col("."), 0)), "name")
+"     if cur_syntax == "Comment"
+"         return comment_text_width
+"     elseif cur_syntax == "String"
+"         " Check to see if we're in a docstring
+"         let lnum = line(".")
+"         while lnum >= 1 && (synIDattr(synIDtrans(synID(lnum, col([lnum, "$"]) - 1, 0)), "name") == "String" || match(getline(lnum), '\v^\s*$') > -1)
+"             if match(getline(lnum), "\\('''\\|\"\"\"\\)") > -1
+"                 " Assume that any longstring is a docstring
+"                 return comment_text_width
+"             endif
+"             let lnum -= 1
+"         endwhile
+"     endif
+"
+"     return normal_text_width
+" endfunction
+"
+" augroup pep8
+"     au!
+"     autocmd CursorMoved,CursorMovedI * :if &ft == 'python' | :exe 'setlocal textwidth='.GetPythonTextWidth() | :endif
+" augroup END
+" """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
