@@ -86,9 +86,20 @@ Plugin 'burnettk/vim-angular'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
-""" vim options """
+""" vim options
 
+" Set <Leader> to space bar
 let mapleader=' '
+" <Leader>P pastes at end of line
+:map <Leader>P $p
+" <Leader> <space> goes to the end of the line
+:map <Leader><space> $
+" <Leader> O or o inserts a blank line and returns to NORMAL
+:map <Leader>O O<Esc>
+:map <Leader>o o<Esc>
+" <Leader> 8 goes to the 80th column
+:map <Leader>8 80\|
+
 
 " set t_Co=256
 set t_Co=16
