@@ -10,6 +10,8 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 
+Plugin 'tpope/vim-sensible'
+
 " Plugin 'Valloric/YouCompleteMe'
 "
 "
@@ -19,6 +21,8 @@ let g:airline_powerline_fonts = 1
 let g:airline#extensions#syntastic#enabled = 1
 
 Plugin 'mhinz/vim-startify'
+
+Plugin 'wincent/command-t'
 
 Plugin 'altercation/vim-colors-solarized'
 
@@ -31,6 +35,10 @@ let g:localvimrc_persistent = 2
 Plugin 'tomtom/tcomment_vim'
 
 Plugin 'ervandew/supertab'
+
+Plugin 'tpope/vim-surround'
+
+Plugin 'jiangmiao/auto-pairs'
 
 " Syntastic
 " Plugin 'scrooloose/syntastic'
