@@ -151,6 +151,8 @@ set formatoptions+=j
 " Timeout key combinations after .1 seconds
 set ttimeout
 set ttimeoutlen=100
+" Use vertical diffs
+set diffopt+=vertical
 
 
 """ Filetype-specific settings """
@@ -182,6 +184,43 @@ func! DeleteTrailingWS()
   exe "normal `z"
 endfunc
 autocmd BufWrite *.py :call DeleteTrailingWS()
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Find Nearest
+" Source: http://vim.1045645.n5.nabble.com/find-closest-occurrence-in-both-directions-td1183340.html
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""                                                        
+function! FindNearest(pattern)
+  let @/=a:pattern
+  let b:prev = search(a:pattern, 'bncW')
+  if b:prev
+    let b:next = search(a:pattern, 'ncW')
+    if b:next
+      let b:cur = line('.')
+      if b:cur - b:prev == b:next - b:cur
+        " on a match
+      elseif b:cur - b:prev < b:next - b:cur
+        ?
+      else
+        /
+      endif
+    else
+      ?
+    endif
+  else
+    /
+  endif
+endfunction
+
+command! -nargs=1 FN call FindNearest(<q-args>)
+nmap \ :FN<space>
+
+""" Select between conflict blocks
+" select ours
+nmap <leader>so \<<<<<<<<CR>dd/=======<CR>V/>>>>>>><CR>d
+" select theirs
+nmap <leader>st \<<<<<<<<CR>V/=======<CR>dk/>>>>>>><CR>dd
+" find next conflict
+nmap <leader>fc /<<<<<<<<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " set pep8 text widths for python comments and docstrings
