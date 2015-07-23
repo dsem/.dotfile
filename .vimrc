@@ -64,7 +64,10 @@ Plugin 'nvie/vim-flake8'
 autocmd BufWritePost *.py call Flake8()
 " let g:flake8_show_in_file = 1
 
-Plugin 'python-rope/ropevim'
+" Rope doesn't work with python3
+" Plugin 'python-rope/ropevim'
+" map <leader>j :RopeGotoDefinition<CR>
+" map <leader>r :RopeRename<CR>
 
 " Plugin 'klen/python-mode'
 " Don't ignore any linting errors or warnings with pymode
