@@ -191,7 +191,8 @@ autocmd BufWrite *.py :call DeleteTrailingWS()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Find Nearest
 " Source: http://vim.1045645.n5.nabble.com/find-closest-occurrence-in-both-directions-td1183340.html
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""                                                        
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 function! FindNearest(pattern)
   let @/=a:pattern
   let b:prev = search(a:pattern, 'bncW')
