@@ -23,6 +23,7 @@ let g:airline#extensions#syntastic#enabled = 1
 Plugin 'mhinz/vim-startify'
 
 Plugin 'wincent/command-t'
+let g:CommandTFileScanner = 'git'
 
 Plugin 'altercation/vim-colors-solarized'
 
@@ -149,6 +150,8 @@ set sidescrolloff=3
 set relativenumber
 " Use advance command line completion
 set wildmenu
+" wild should ignore files in python's __pycache__ directory
+set wildignore+=*/__pycache__/*
 " Delete comment character when joining commented lines
 set formatoptions+=j
 " Timeout key combinations after .1 seconds
