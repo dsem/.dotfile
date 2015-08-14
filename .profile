@@ -24,6 +24,7 @@ fi
 export WORKON_HOME=$HOME/.virtualenvs
 
 alias ll='ls -l'
+alias grep='grep --exclude-dir="__pycache__"'
 
 # Only load Liquid Prompt in interactive shells, not from a script or from scp
 [[ $- = *i*  ]] && source ~/liquidprompt/liquidprompt
