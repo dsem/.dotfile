@@ -39,6 +39,8 @@ Plugin 'ervandew/supertab'
 
 Plugin 'tpope/vim-surround'
 
+Plugin 'tpope/vim-repeat'
+
 Plugin 'jiangmiao/auto-pairs'
 
 " Syntastic
