@@ -27,7 +27,7 @@ alias ll='ls -l'
 alias grep='grep --exclude-dir="__pycache__"'
 
 # Only load Liquid Prompt in interactive shells, not from a script or from scp
-[[ $- = *i*  ]] && source ~/liquidprompt/liquidprompt
+[[ $- = *i*  ]] && source $HOME/.dotfile/liquidprompt/liquidprompt
 
 # Add django bash completion
 . $HOME/.dotfile/django_bash_completion.sh
