@@ -7,7 +7,7 @@ then
     ln -s .dotfile/.vim
     ln -s .dotfile/.vimrc
     ln -s .dotfile/.profile
-    ln -s .dotfile/.gitconfig
+    cp .dotfile/.gitconfig . # then add email
 
 Open vim and do
 
