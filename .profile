@@ -22,6 +22,8 @@ if [ -d "$HOME/bin" ] ; then
 fi
 
 export WORKON_HOME=$HOME/.virtualenvs
+export EDITOR=vim
+export VISUAL=vim
 
 alias ll='ls -l'
 alias grep='grep --exclude-dir="__pycache__"'
