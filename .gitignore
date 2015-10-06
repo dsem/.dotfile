@@ -1,3 +1,4 @@
 .vim/bundle/*
 .vim/.netrwhist
 .ipython/profile_default/history.sqlite
+.gitconfig
