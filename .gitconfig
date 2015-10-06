@@ -1,0 +1,10 @@
+[color]
+	ui = true
+[user]
+	name = Dylan Semler
+[push]
+	default = simple
+
+[alias]
+    accept-ours = "!f() { [ -z \"$@\"  ] && set - '.'; git checkout --ours -- \"$@\"; git add -u -- \"$@\";  }; f"
+    accept-theirs = "!f() { [ -z \"$@\"  ] && set - '.'; git checkout --theirs -- \"$@\"; git add -u -- \"$@\";  }; f"
