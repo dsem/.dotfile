@@ -12,3 +12,11 @@ then
 Open vim and do
 
     :PluginInstall
+
+Install ruby-devel
+
+Make the command-t binaries
+
+    cd .vim/bundle/command-t/ruby/command-t
+    ruby extconf.rb
+    make
