@@ -191,6 +191,14 @@ func! DeleteTrailingWS()
 endfunc
 autocmd BufWrite *.py :call DeleteTrailingWS()
 
+" remove spaces round parantheses and brackets
+func! DeleteParenSpaces()
+    exe "normal mz"
+    %s/ \([)\]}]\)/\1/ge
+    %s/\([(\[{]\) /\1/ge
+    exe "normal 'z"
+endfunc
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Find Nearest
 " Source: http://vim.1045645.n5.nabble.com/find-closest-occurrence-in-both-directions-td1183340.html
