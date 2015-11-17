@@ -3,5 +3,5 @@
 	url = https://github.com/gmarik/Vundle.vim.git
 [submodule "liquidprompt"]
 	path = liquidprompt
-	url = git@github.com:nojhan/liquidprompt.git
+	url = https://github.com/nojhan/liquidprompt.git
     ignore = dirty
