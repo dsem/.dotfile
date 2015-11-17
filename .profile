@@ -24,9 +24,11 @@ fi
 export WORKON_HOME=$HOME/.virtualenvs
 export EDITOR=vim
 export VISUAL=vim
+source /usr/local/bin/virtualenvwrapper.sh
 
 alias ll='ls -l'
-alias grep='grep --exclude-dir="__pycache__"'
+alias grep='grep --exclude-dir="__pycache__" --exclude="*.pyc"'
+alias ccurl='curl -c ~/curl_cookies.txt -b ~/curl_cookies.txt'
 
 # Only load Liquid Prompt in interactive shells, not from a script or from scp
 [[ $- = *i*  ]] && source $HOME/.dotfile/liquidprompt/liquidprompt
