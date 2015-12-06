@@ -8,3 +8,7 @@
 [alias]
     accept-ours = "!f() { [ -z \"$@\"  ] && set - '.'; git checkout --ours -- \"$@\"; git add -u -- \"$@\";  }; f"
     accept-theirs = "!f() { [ -z \"$@\"  ] && set - '.'; git checkout --theirs -- \"$@\"; git add -u -- \"$@\";  }; f"
+    lg = log -p
+    lol = log --graph --decorate --pretty=oneline --abbrev-commit
+    lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+    ls = ls-files
