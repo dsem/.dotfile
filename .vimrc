@@ -94,6 +94,12 @@ Plugin 'othree/javascript-libraries-syntax.vim'
 
 Plugin 'burnettk/vim-angular'
 
+
+"""" Ansible Plugins
+
+Plugin 'pearofducks/ansible-vim'
+
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -171,6 +177,8 @@ autocmd BufNewFile,BufRead *.json setfiletype json syntax=javascript
 autocmd BufNewFile,BufRead *.md setlocal filetype=markdown
 " Highlight the 80 character column in python
 autocmd FileType python setlocal colorcolumn=80
+" YAML settings
+autocmd FileType yaml setlocal shiftwidth=2 tabstop=2 softtabstop=2 nosmartindent
 
 """ Functions """
 
