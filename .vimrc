@@ -197,7 +197,7 @@ func! DeleteTrailingWS()
   %s/\s\+$//ge
   exe "normal `z"
 endfunc
-autocmd BufWrite *.py :call DeleteTrailingWS()
+autocmd BufWrite *.py,*.yml,*.yaml :call DeleteTrailingWS()
 
 " remove spaces round parantheses and brackets
 func! DeleteParenSpaces()
