@@ -34,6 +34,8 @@ alias ccurl='curl -c ~/curl_cookies.txt -b ~/curl_cookies.txt'
 
 alias newpass='shuf --random-source=/dev/urandom /usr/share/dict/words | head -n4'
 
+alias vi=vim
+
 # Only load Liquid Prompt in interactive shells, not from a script or from scp
 [[ $- = *i*  ]] && source $HOME/.dotfile/liquidprompt/liquidprompt
 
