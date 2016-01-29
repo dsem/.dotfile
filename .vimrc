@@ -283,3 +283,7 @@ nmap <leader>fc /<<<<<<<<CR>
 "     autocmd CursorMoved,CursorMovedI * :if &ft == 'python' | :exe 'setlocal textwidth='.GetPythonTextWidth() | :endif
 " augroup END
 " """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+map! <F7> :set filetype=python tabstop=8 shiftwidth=8 noexpandtab norelativenumber<return>mzgg=G`z`
+
+set pastetoggle=<F5>
