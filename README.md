@@ -1,6 +1,6 @@
 Start with:
 
-    git clone --recursive https://github.com/dsem/.dotfile.git
+    git clone --recursive git@github.com:dsem/.dotfile.git
 
 then 
 
