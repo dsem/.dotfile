@@ -3,3 +3,4 @@
 .ipython/profile_default/history.sqlite
 .gitconfig
 .vim/bundle/command-t/ruby/command-t/metadata.rb
+.vim/plugged
