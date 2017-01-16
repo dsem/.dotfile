@@ -9,4 +9,5 @@ fi
 
 PATH=$PATH:$HOME/.local/bin:$HOME/bin:/usr/local/heroku/bin
 
+export GOPATH=$HOME/.gowork
 export PATH
